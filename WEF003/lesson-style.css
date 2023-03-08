@@ -1,0 +1,16 @@
+h1 {
+    font-size: 1.8rem;
+    color: rgb(84, 108, 204);
+}
+h2 {
+    font-size: 1rem;
+    color: blue;
+}
+h3 {
+    background-color: black;
+    color: aliceblue;
+}
+h4 {
+    background-color: #c0ffee;
+    color: hsl(269, 53%, 66%);
+}

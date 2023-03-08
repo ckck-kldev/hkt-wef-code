@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Game of Life</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="css/fontAwesome.css" />
+    <link rel="stylesheet" href="css/light-box.css" />
+    <link rel="stylesheet" href="css/templatemo-style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900"
+      rel="stylesheet"
+    />
+    <link href="css/game-of-life.css" rel="stylesheet" />
+    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+  </head>
+  <body>
+    <div
+      class="bg-image position-fixed"
+      style="background-image: url('img/5445590.jpg'); height: 100vh"
+    >
+      <nav>
+        <div class="logo game-logo">
+          <a href="index.html">Conway's <em>Game of Life</em></a>
+        </div>
+        <div class="menu-icon">
+          <span></span>
+        </div>
+      </nav>
+      <div id="game-html" class="container-fluid pt-6">
+        <div class="row">
+          <div id="game-container" class="">
+            <div id="game-canvas"></div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="game-control row d-flex">
+          <div class="col-md-3"></div>
+          <div class="col-md-6 d-flex justify-content-center">
+            <div class="row">
+              <select id=""></select>
+
+              <button
+                type="button"
+                class="btn btn-outline-light col-lg-1"
+                id="reset-game"
+              >
+                <i class="fa fa-repeat" aria-hidden="true"
+                  ><div class="icon-text">Reset</div></i
+                >
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-light col-lg-1 inactive"
+                id="stop-game"
+              >
+                <i class="fa fa-stop" aria-hidden="true"
+                  ><div class="icon-text">Stop</div></i
+                >
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-light"
+                id="random-button"
+              >
+                <i class="fa fa-random" aria-hidden="true"
+                  ><div class="icon-text">Random</div></i
+                >
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-light inactive"
+                id="grid-display"
+              >
+                <i class="fa fa-th" aria-hidden="true"
+                  ><div class="icon-text">Grid</div></i
+                >
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-light"
+                data-toggle="modal"
+                data-target="#game-info-modal"
+                id="info-button"
+              >
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <div class="icon-text">Info</div>
+              </button>
+              <div
+                class="modal fade"
+                id="game-info-modal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="myModalLabel"
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="fal">&times;</span>
+                      </button>
+                      <h4 class="modal-title" id="myModalLabel">
+                        Conway's Game of Life
+                      </h4>
+                    </div>
+                    <div class="modal-body">
+                      Here are the rules of Game of life:<br /><br />
+                      If a box has life and it has less than 2 neighbors. It
+                      dies of loneliness. The box becomes lifeless next
+                      generation.<br /><br />
+                      If a box has life and it has more than 3 neighbors. It
+                      dies of overpopulation. The box becomes lifeless next
+                      generation.<br /><br />
+                      If a box has life and it has 2 to 3 neighbors. Nothing
+                      changes for this box.<br /><br />
+                      If a box has no life and it has 3 neighbors, the box in
+                      next generation fills with life because of
+                      reproduction.<br /><br />
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-default"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="btn-group dropup">
+                <button
+                  class="btn btn-default dropdown-toggle"
+                  type="button"
+                  id="dropdown-setting"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fa fa-cog" aria-hidden="true"></i>
+                  <div class="icon-text">Setting</div>
+                </button>
+                <ul
+                  class="dropdown-menu"
+                  aria-labelledby="dropdownMenu2"
+                  id="rules-dropup"
+                >
+                  <li>
+                    <label
+                      class="form-label"
+                      for="customRange1"
+                      id="speed-slider-display"
+                      >FPS :30</label
+                    >
+                    <div class="range">
+                      <input
+                        type="range"
+                        class="form-range"
+                        id="speed-slider"
+                        min="1"
+                        max="100"
+                        value="30"
+                        step="1"
+                      />
+                    </div>
+                  </li>
+                  <li>
+                    <label
+                      class="form-label"
+                      for="customRange1"
+                      id="loneliness-slider-display"
+                      >Die of Loneliness: 2</label
+                    >
+                    <div class="range">
+                      <input
+                        type="range"
+                        class="form-range"
+                        id="loneliness-slider"
+                        min="1"
+                        max="10"
+                        value="2"
+                        step="1"
+                      />
+                    </div>
+                  </li>
+                  <li>
+                    <label
+                      class="form-label"
+                      for="customRange1"
+                      id="overpopulation-slider-display"
+                      >Die of Overpopulation: 3</label
+                    >
+                    <div class="range">
+                      <input
+                        type="range"
+                        class="form-range"
+                        id="overpopulation-slider"
+                        min="1"
+                        max="10"
+                        value="3"
+                        step="1"
+                      />
+                    </div>
+                  </li>
+                  <li>
+                    <label
+                      class="form-label"
+                      for="customRange1"
+                      id="repopulation-slider-display"
+                      >Repopulation: 3</label
+                    >
+                    <div class="range">
+                      <input
+                        type="range"
+                        class="form-range"
+                        id="repopulation-slider"
+                        min="1"
+                        max="10"
+                        value="3"
+                        step="1"
+                      />
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3"></div>
+        </div>
+      </div>
+    </div>
+    <section class="overlay-menu">
+      <div class="container">
+        <div class="row">
+          <div class="main-menu">
+            <ul>
+              <li>
+                <a href="index.html">Home</a>
+              </li>
+              <li>
+                <a href="about.html">About me</a>
+              </li>
+              <li>
+                <a href="game-of-life.html">Game of Life</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="js/vendor/jquery-1.11.2.min.js"><\/script>'
+        );
+    </script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+    <script src="js/game-of-life.js"></script>
+  </body>
+</html>

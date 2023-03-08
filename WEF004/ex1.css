@@ -1,0 +1,20 @@
+.container {
+    border: solid black 2px;
+    border-radius: 5px;
+    width: 640px;
+    height: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#box-1 {
+    width: 100px;
+    height: 100px;
+    border: solid gray 1px;
+    color: gray;
+    font-size: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
